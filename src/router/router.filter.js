@@ -10,7 +10,7 @@ export default function (router) {
     // )
     if (to.path == '/') {
       let wxConfig = {
-        title: '天空之橙·Design｜建筑·空间·景观·运营「天空之橙·视频号」',
+        title: '天空之橙·Design｜建筑·空间·景观·运营',
         url: location.href,
         desc: '',
         link: window.location.origin + window.location.pathname,

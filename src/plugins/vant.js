@@ -6,6 +6,7 @@ import {
   Cell,
   Tabbar,
   TabbarItem,
+  ImagePreview,
   Image as VanImage,
   NavBar,
   Icon,
@@ -20,6 +21,7 @@ import {
   Tabs
 } from 'vant'
 Vue.use(Tab)
+Vue.use(ImagePreview)
 Vue.use(Tabs)
 Vue.use(Field)
 Vue.use(Button)

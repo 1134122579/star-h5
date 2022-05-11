@@ -4,14 +4,15 @@
     <div class="header">
       <!-- 头像 -->
       <div class="header-image">
-        <!-- <img src="" alt=""> -->
+        <img
+          src="https://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83eobpsN46APV89W3j2eaOJU6QCdfOernzbdChtPJDPBTll8Gl1xWaRKczWUicaQxCSEGOQe1C5rvKHQ/0"
+          alt=""
+        />
       </div>
       <!-- 个人信息 -->
       <div class="user-info">
-        <div class="user-name">名字</div>
-        <div class="user-desc">
-          简介氨基酸的急啊离开收到就卡机卡了简介氨基酸的急啊离开收到就卡机卡了简介氨基酸的急啊离开收到就卡机卡了
-        </div>
+        <div class="user-name">陈嵩 | 盛视天橙™天空之橙</div>
+        <div class="user-desc">建筑·空间·设计</div>
       </div>
     </div>
     <!-- 内容 -->
@@ -40,11 +41,12 @@
         <van-sticky>
           <div class="main-content-tab">
             <van-tabs
-              v-model="listQuery.type"
+              v-model="listQuery.label"
               :title-inactive-color="titleinactivecolor"
               :title-active-color="titleactivecolor"
               :color="titleactivecolor"
               :line-width="linewidth"
+              @change="tabchange"
             >
               <van-tab v-for="(item, index) in typelist" :name="item.id" :title="item.name"> </van-tab>
             </van-tabs>
@@ -105,7 +107,9 @@
 
 <script>
 import { getPyq } from '@/api/user'
-import { formatTime } from '@/utils/'
+import { formatTime } from '@/utils'
+import { setShareInfo } from '@/utils/share'
+
 export default {
   data() {
     return {
@@ -151,8 +155,23 @@ export default {
   },
   created() {
     // this.getList()
+    let wxConfig = {
+      title: '天空之橙·Design｜建筑·空间·景观·运营',
+      url: location.href,
+      desc: '',
+      link: window.location.origin + window.location.pathname,
+      imgUrl: 'http://api.skyorange.cn/logo.jpg'
+    }
+    setShareInfo(wxConfig)
   },
   methods: {
+    tabchange(name, title) {
+      console.log(name, title, this.listQuery)
+      this.listQuery.page = 1
+      this.list = []
+      this.finished = false
+      //   this.getList()
+    },
     onDk() {
       this.$toast.success('打卡成功')
     },
@@ -165,7 +184,7 @@ export default {
           item['create_time'] = formatTime(+new Date(item['create_time']))
           return item
         })
-        this.list.push(...res.data)
+        this.list = this.list.concat(...res.data)
         // 加载状态结束
         this.loading = false
         this.listQuery.page = this.listQuery.page + 1
@@ -206,6 +225,12 @@ export default {
       background: #ccc;
       margin-left: 25px;
       flex-shrink: 0;
+      img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+      }
     }
     .user-info {
       margin-left: 15px;
