@@ -12,6 +12,7 @@ import {
   Icon,
   Field,
   Sticky,
+  Divider,
   Popup,
   Empty,
   Swipe,
@@ -21,6 +22,7 @@ import {
   Tabs
 } from 'vant'
 Vue.use(Tab)
+Vue.use(Divider)
 Vue.use(ImagePreview)
 Vue.use(Tabs)
 Vue.use(Field)

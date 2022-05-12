@@ -1,7 +1,7 @@
 <template>
   <div class="homepage">
     <!-- 头部 -->
-    <div class="header">
+    <div class="header" id="tabTop">
       <!-- 头像 -->
       <div class="header-image">
         <img
@@ -47,6 +47,7 @@
               :color="titleactivecolor"
               :line-width="linewidth"
               @change="tabchange"
+              title-class="tabStyle"
             >
               <van-tab v-for="(item, index) in typelist" :name="item.id" :title="item.name"> </van-tab>
             </van-tabs>
@@ -54,7 +55,13 @@
         </van-sticky>
         <!-- 列表 -->
         <div class="man-list">
-          <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="getList">
+          <van-list
+            v-model="loading"
+            :finished="finished"
+            finished-text="没有更多了"
+            @load="getList"
+            :immediate-check="false"
+          >
             <div class="block-style" @click="goDetail(item)" v-for="(item, index) in list">
               <div class="user-headerimage">
                 <i class="iconfont icon-huangguan huangguanstyle"></i>
@@ -71,11 +78,16 @@
                 </div>
                 <!-- 图片 -->
                 <div class="block-list">
-                  <div class="imgonesrtle" v-for="(imgItem, index) in item.imgs"><img :src="imgItem" /></div>
+                  <div class="imgonesrtle" v-for="(imgItem, index) in item.imgs">
+                    <img :src="imgItem + '?imageView2/3/w/300'" />
+                  </div>
                 </div>
                 <!-- 操作 -->
-                <div class="block-button">
-                  <i class="iconfont icon-zan"></i>
+                <div class="block-button" @click.stop="stopClick">
+                  <i
+                    :class="zanlist.includes(item.id) ? 'iconfont icon-dianzan_s colorRed ' : 'iconfont icon-zan'"
+                    @click="zanClick(item.id)"
+                  ></i>
                   <i class="iconfont icon-duihuaqipao"></i>
                 </div>
               </div>
@@ -117,44 +129,45 @@ export default {
       titleactivecolor: '#333',
       linewidth: '20px',
       list: [],
+      iszan: false,
       isshareShow: false,
       loading: false,
       finished: false,
       listQuery: {
-        type: 1,
-        label: 1,
+        label: '',
         page: 1
       },
+      zanlist: [],
       typelist: [
         {
-          id: 1,
+          id: '',
           name: '全部'
         },
         {
-          id: 2,
+          id: 1,
           name: '精华'
         },
         {
-          id: 3,
+          id: 2,
           name: '建筑'
         },
         {
-          id: 4,
+          id: 3,
           name: '景观'
         },
         {
-          id: 5,
+          id: 4,
           name: '空间'
-        },
-        {
-          id: 6,
-          name: '打卡'
         }
+        // {
+        //   id: 6,
+        //   name: ''
+        // }
       ]
     }
   },
   created() {
-    // this.getList()
+    this.getList()
     let wxConfig = {
       title: '天空之橙·Design｜建筑·空间·景观·运营',
       url: location.href,
@@ -165,12 +178,28 @@ export default {
     setShareInfo(wxConfig)
   },
   methods: {
+    scrollIntoView(id) {
+      console.log(this.$el.querySelector(id))
+      this.$el.querySelector(id).scrollIntoView({
+        behavior: 'smooth', // 平滑过渡
+        block: 'start' // 上边框与视窗顶部平齐。默认值
+      })
+    },
+    stopClick(e) {
+      console.log(e)
+    },
+    zanClick(id) {
+      if (this.zanlist.includes(id)) {
+        this.zanlist = this.zanlist.filter(item => item != id)
+      } else {
+        this.zanlist.push(id)
+      }
+    },
     tabchange(name, title) {
-      console.log(name, title, this.listQuery)
       this.listQuery.page = 1
-      this.list = []
       this.finished = false
-      //   this.getList()
+      this.scrollIntoView('#tabTop')
+      this.getList()
     },
     onDk() {
       this.$toast.success('打卡成功')
@@ -179,15 +208,21 @@ export default {
       this.isshareShow = true
     },
     getList() {
+      this.loading = true
       getPyq(this.listQuery).then(res => {
         res.data = res.data.map(item => {
-          item['create_time'] = formatTime(+new Date(item['create_time']))
+          item['create_time'] = formatTime(+new Date(item['create_time'].replaceAll('-', '/')))
           return item
         })
-        this.list = this.list.concat(...res.data)
+
+        if (this.listQuery.page == 1) {
+          this.list = res.data
+        } else {
+          this.list = this.list.concat(res.data)
+        }
         // 加载状态结束
         this.loading = false
-        this.listQuery.page = this.listQuery.page + 1
+        this.listQuery.page++
         // 数据全部加载完成
         if (res.data.length <= 0) {
           this.finished = true
@@ -195,7 +230,7 @@ export default {
       })
     },
     goDetail(data) {
-      this.$router.push({
+      this.$router.replace({
         path: '/detail',
         query: {
           id: data.id
@@ -207,22 +242,45 @@ export default {
 </script>
 
 <style lang="scss">
+.colorRed {
+  color: #fc5531;
+  font-size: 24px;
+}
 .homepage {
-  background: #ccc url('../../assets/bg.jpg') no-repeat;
+  position: relative;
+  background: rgba(0, 0, 0, 0);
+  overflow: hidden;
+  z-index: 1;
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 320px;
+    background: #ccc url('../../assets/bg.jpg') no-repeat;
+    background-size: 100% cover;
+    z-index: -1;
+    // animation: fadenum12 30s ;
+    animation-name: fadenum12;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-duration: 50s;
+  }
   //   background-size: cover;
   .header {
-    height: 200px;
+    background: rgba(0, 0, 0, 0);
+    height: 210px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     box-sizing: border-box;
     padding-right: 10px;
+
     .header-image {
-      width: 74px;
-      height: 74px;
+      width: 68px;
+      height: 68px;
       border-radius: 50%;
       overflow: hidden;
-      background: #ccc;
       margin-left: 25px;
       flex-shrink: 0;
       img {
@@ -236,10 +294,10 @@ export default {
       margin-left: 15px;
       color: #fff;
       .user-name {
-        font-size: 18px;
+        font-size: 16px;
       }
       .user-desc {
-        font-size: 14px;
+        font-size: 12px;
         @include textoverflow(2);
       }
     }
@@ -257,7 +315,7 @@ export default {
         li {
           text-align: center;
           .icon-size {
-            font-size: 20px;
+            font-size: 22px;
           }
           p {
             text-align: center;
@@ -267,6 +325,16 @@ export default {
     }
     .main-content {
       background: #fff;
+      .main-content-tab {
+        .van-tabs {
+          .van-tabs__line {
+            bottom: 0.5rem;
+          }
+          .van-tab {
+            font-weight: 700;
+          }
+        }
+      }
       .man-list {
         padding: 10px 20px;
         .block-style {
@@ -278,7 +346,6 @@ export default {
             height: 40px;
             flex-shrink: 0;
             border-radius: 50%;
-            background: #ccc;
             position: relative;
             margin-right: 10px;
             img {
@@ -303,15 +370,17 @@ export default {
           .block-content {
             flex: 1;
             .block-user-info {
-              font-size: 14px;
+              color: #555454;
+              font-size: 16px;
             }
             .block-time {
-              font-size: 10px;
-              color: #ccc;
+              font-size: 12px;
+              color: #d2d2d2;
             }
             .block-text {
               font-size: 16px;
               margin-top: 6px;
+              color: #555454;
               @include textoverflow(5);
             }
             .block-list {
@@ -325,7 +394,6 @@ export default {
                 flex-shrink: 0;
                 width: 90px;
                 height: 90px;
-                background: #ccc;
                 img {
                   width: 100%;
                   height: 100%;

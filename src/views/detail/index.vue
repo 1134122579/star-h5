@@ -6,6 +6,7 @@
       <p>建筑·空间·设计 的主题</p>
       <p class="time">{{ detail.create_time }}</p>
     </div>
+    <van-divider :style="{ color: '#d2d2d2', borderColor: '#d2d2d2', margin: '0 8px' }" />
     <div class="content-text">
       {{ detail.title }}
     </div>
@@ -14,6 +15,7 @@
         <img @click="ImagePreviewClick(index)" :src="item" alt="" />
       </div>
     </div>
+    <van-divider :style="{ color: '#d2d2d2', borderColor: '#d2d2d2', padding: '16px 0', margin: '0 8px' }" />
     <!-- 横 -->
     <div class="h-imglist">
       <div class="h-img" v-for="(item, index) in detail.imgs">
@@ -57,12 +59,12 @@ export default {
       let article_id = this.$route.query.id
       getShareArticleDetails({ article_id }).then(res => {
         let data = res.data
-        data['create_time'] = parseTime(data['create_time'], '{y}-{m}-{d} {h}:{i}')
+        data['create_time'] = parseTime(data['create_time'].replaceAll('-', '/'), '{y}/{m}/{d} {h}:{i}')
         this.detail = data
         let wxConfig = {
-          title: data.title,
+          title: data.share_title,
           url: location.href,
-          desc: '',
+          desc: data.desc,
           link: window.location.origin + window.location.pathname + '?id=' + data.id,
           imgUrl: data.imgs.length > 0 ? data.imgs[0] : 'http://api.skyorange.cn/logo.jpg'
         }
@@ -74,12 +76,12 @@ export default {
 </script>
 <style lang="scss">
 .detailpage {
-  padding: 30px 20px;
+  padding: 30px 18px;
   overflow-x: hidden;
   position: relative;
   background: rgba(0, 0, 0, 0);
-  position: absolute;
   box-sizing: border-box;
+  z-index: 1;
   //   圆
   .radius {
     border-radius: 50%;
@@ -88,33 +90,40 @@ export default {
     overflow: hidden;
     position: absolute;
     top: -60px;
+    z-index: -1;
     right: -60px;
     background: radial-gradient(circle, #1ec7a8, #3fe4c6, #9cebdf);
   }
   .title {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
     color: #555454e0;
+    padding: 0 8px;
+    box-sizing: border-box;
   }
   .label {
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid #d2d2d2;
+    // border-bottom: 1px solid #d2d2d2;
+    align-items: flex-end;
     margin-top: 10px;
     padding: 20px 0;
+    margin: 0 8px;
+    box-sizing: border-box;
     p {
-      font-size: 16px;
+      font-size: 14px;
       color: #93d7c6;
     }
     .time {
-      font-size: 14px;
+      font-size: 12px;
       color: #d2d2d2;
     }
   }
   .content-text {
     line-height: 2;
-    font-size: 20px;
+    font-size: 16px;
     padding: 20px 0;
+    margin: 0 8px;
     color: #949292;
   }
   .content-imglist {
@@ -123,6 +132,7 @@ export default {
     align-items: center;
     flex-wrap: wrap;
     padding-left: 8px;
+
     .imgstyle {
       flex-shrink: 0;
       //   background: #;
@@ -138,10 +148,12 @@ export default {
     }
   }
   .h-imglist {
+    padding: 8px;
+    overflow: hidden;
     .h-img {
       width: 100%;
-      padding: 8px;
       box-sizing: border-box;
+      margin-bottom: 8px;
       img {
         width: 100%;
         object-fit: contain;
