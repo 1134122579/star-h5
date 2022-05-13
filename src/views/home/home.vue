@@ -4,15 +4,17 @@
     <div class="header" id="tabTop">
       <!-- 头像 -->
       <div class="header-image">
-        <img
+        <!-- <img
           src="https://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83eobpsN46APV89W3j2eaOJU6QCdfOernzbdChtPJDPBTll8Gl1xWaRKczWUicaQxCSEGOQe1C5rvKHQ/0"
           alt=""
-        />
+        /> -->
+        <img src="@/assets/logo.png" alt="" />
       </div>
       <!-- 个人信息 -->
       <div class="user-info">
-        <div class="user-name">陈嵩 | 盛视天橙™天空之橙</div>
-        <div class="user-desc">建筑·空间·设计</div>
+        <!-- <div class="user-name">陈嵩 | 盛视天橙™天空之橙</div> -->
+        <div class="user-name">盛视天橙 DESIGN</div>
+        <div class="user-desc">建筑丨空间丨景观丨设计丨运营</div>
       </div>
     </div>
     <!-- 内容 -->
@@ -182,10 +184,10 @@ export default {
   },
   methods: {
     goAbout() {
-      this.$router.replace({ path: '/about' })
+      this.$router.push({ path: '/about' })
     },
     goImagepage() {
-      this.$router.replace({ path: '/imagelist' })
+      this.$router.push({ path: '/imagelist' })
     },
     scrollIntoView(id) {
       console.log(this.$el.querySelector(id))
@@ -242,7 +244,7 @@ export default {
       })
     },
     goDetail(data) {
-      this.$router.replace({
+      this.$router.push({
         path: '/detail',
         query: {
           id: data.id
@@ -291,7 +293,7 @@ export default {
     .header-image {
       width: 68px;
       height: 68px;
-      border-radius: 50%;
+      //   border-radius: 50%;
       overflow: hidden;
       margin-left: 25px;
       flex-shrink: 0;

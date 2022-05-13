@@ -19,11 +19,11 @@ export default function (router) {
     }
     if (to.path == '/about') {
       wxConfig = {
-        title: '天空之橙·Design',
+        title: '天空之橙·Design 关于我们',
         url: location.href,
         desc: '',
-        link: window.location.origin + to.fullPath,
-        //   link: window.location.origin + window.location.pathname,
+        // link: window.location.origin + to.fullPath,
+        link: window.location.origin + window.location.pathname,
         imgUrl: 'http://api.skyorange.cn/logo.jpg'
       }
     }

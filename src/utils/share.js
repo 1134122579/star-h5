@@ -32,12 +32,28 @@ async function getShareInfo(wxConfig, callback) {
     timestamp: timestamp, // 必填，生成签名的时间戳，刚才接口拿到的数据
     nonceStr: nonceStr, // 必填，生成签名的随机串
     signature: signature, // 必填，签名，见附录1
-    jsApiList: ['updateAppMessageShareData', 'updateTimelineShareData'], // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+    jsApiList: ['updateAppMessageShareData', 'updateTimelineShareData', 'hideMenuItems', 'hideAllNonBaseMenuItem'], // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
     openTagList: ['wx-open-subscribe']
   })
   wx.ready(function () {
     wx.updateAppMessageShareData(wxConfig)
     wx.updateTimelineShareData(wxConfig)
+    wx.hideMenuItems({
+      menuList: [
+        'menuItem:copyUrl',
+        'menuItem:originPage',
+        'menuItem:share:email',
+        'menuItem:openWithSafari',
+        'menuItem:openWithQQBrowser',
+        'menuItem:editTag',
+        'menuItem:share:brand',
+        'menuItem:exposeArticle',
+        'menuItem:dayMode',
+        'menuItem:refresh',
+        'menuItem:setFont'
+      ] // 要隐藏的菜单项，只能隐藏“传播类”和“保护类”按钮，所有menu项见附录3
+    })
+    // wx.hideAllNonBaseMenuItem()
   })
 }
 function setShareInfo(wxConfig) {

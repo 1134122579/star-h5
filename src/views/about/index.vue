@@ -1,37 +1,42 @@
 <template>
-  <div class="homepage">
+  <div class="aboutpage">
     <!-- 头部 -->
     <div class="header" id="tabTop">
       <!-- 个人信息 -->
       <div class="user-info">
-        <div class="user-name">天空之橙</div>
-        <div class="user-desc">星主 陈嵩 已运营1860天</div>
+        <div class="user-name">盛视天橙 DESIGN</div>
+        <div class="user-desc">建筑丨空间丨景观丨设计丨运营</div>
       </div>
     </div>
     <!-- 内容 -->
     <div class="main">
-      <div class="main-header">
-        <!-- 头像 -->
-        <div class="header-image">
-          <img
-            src="https://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83eobpsN46APV89W3j2eaOJU6QCdfOernzbdChtPJDPBTll8Gl1xWaRKczWUicaQxCSEGOQe1C5rvKHQ/0"
-            alt=""
-          />
-        </div>
-        <!-- 个人信息 -->
-        <div class="user-info">
-          <div class="user-name">
-            <div class="user-l">
-              陈嵩
-              <van-tag type="warning" color="#FFA34B">星主</van-tag>
+      <van-sticky @change="stickychange">
+        <div class="main-header" :style="isFixed && 'align-items: center;box-shadow: 0 1px 20px #ccc'">
+          <!-- 头像 -->
+          <div class="header-image">
+            <img src="../../assets/logo.png" alt="" />
+          </div>
+          <!-- 个人信息 -->
+
+          <div class="user-info">
+            <div class="user-name">
+              <div class="user-l">
+                <div>
+                  <p>盛视天橙</p>
+                  <p class="English">DESIGN</p>
+                </div>
+                <!-- <van-tag type="warning" color="#FFA34B">星主</van-tag> -->
+              </div>
+              <div class="user-r" @click="goGZH">关注我们</div>
             </div>
-            <div class="user-r" style="color: #0ab18f">3小时前活跃</div>
-          </div>
-          <div class="user-desc">
-            建筑·空间·设计建筑·空间·设计建筑·空间·设计建筑·空间·设计建筑·空间·设计建筑·空间·设计建筑·空间·设计建筑·空间·设计建筑·空间·设计建筑·空间·设计建筑·空间·设计建筑·空间·设计建筑·空间·设计建筑·空间·设计建筑·空间·设计建筑·空间·设计建筑·空间·设计建筑·空间·设计建筑·空间·设计建筑·空间·设计建筑·空间·设计建筑·空间·设计建筑·空间·设计建筑·空间·设计
+            <div class="user-desc" v-show="!isFixed">
+              <p>年轻 · 时尚 · 新锐 · 跨界</p>
+              <p>做年轻人喜爱的一切</p>
+            </div>
           </div>
         </div>
-      </div>
+      </van-sticky>
+
       <div class="main-content">
         <div class="block">
           <div class="block-header">
@@ -39,30 +44,43 @@
             <span><i class="iconfont icon-qizhi-"></i> 投诉</span>
           </div>
           <div class="block-content">
-            哈哈说或或或哈哈说或或或哈哈说或或或哈哈说或或或哈哈说或或或哈哈说或或或哈哈说或或或哈哈说或或或哈哈说或或或哈哈说或或或哈哈说或或或哈哈说或或或哈哈说或或或哈哈说或或或哈哈说或或或哈哈说或或或哈哈说或或或哈哈说或或或哈哈说或或或
+            <h6>盛视天橙 DESIGN</h6>
+            <p style="margin: 10px 0">「有趣的灵魂在这里遇见」</p>
+            <p>
+              上海盛视天橙传媒股份有限公司（盛视天橙：837461.OC）成立于2009年，隶属于天空之橙控股集团。是一家集规划策划、建筑规划、空间设计、文创文旅、运营管理、视频制作、技术开发等领域为一体的科技文创企业，国家认证高新技术企业、上海文化创意产业标杆企业。
+            </p>
+            <h6>服务内容</h6>
+            <p>建筑设计丨空间设计丨景观设计</p>
+            <p>文创文旅丨城市更新丨智慧城市</p>
+            <p>运营管理丨视频制作丨数字开发</p>
+            <h6>设计宗旨</h6>
+            <p>未来城市：与年轻人同行</p>
+            <p>用设计留住年轻人，赋予城市新生命</p>
           </div>
           <van-divider :style="{ color: '#d2d2d2', borderColor: '#d2d2d2', padding: '16px 0', margin: '0 8px' }" />
           <div class="block-bottom">
             <ul class="">
               <li>
-                <p style="color: #0ab18f">3小时前</p>
-                <p class="tag">最近更新</p>
+                <p style="color: #0ab18f">2009年</p>
+                <p class="tag">成立</p>
               </li>
               <li>
-                <p>960+</p>
-                <p class="tag">成员数</p>
+                <p>500+</p>
+                <p class="tag">设计师资源</p>
               </li>
               <li>
-                <p>960+</p>
-                <p class="tag">主题数</p>
+                <p>1000+</p>
+                <p class="tag">客户数</p>
               </li>
             </ul>
           </div>
         </div>
       </div>
       <div class="button-bottom">
-        <van-button color="#FE7A53" block @click="onclick"> 合作咨询 </van-button>
-        <van-button color="#767676" style="width: 80px" @click="goHome">返回 </van-button>
+        <van-button color="#FE7A53" block @click="onclick" style="border-radius: 5px"> 合作咨询 </van-button>
+        <van-button color="#767676" style="width: 80px; border-radius: 5px; margin-left: 3px" @click="goHome"
+          >首页
+        </van-button>
       </div>
     </div>
 
@@ -97,6 +115,7 @@ import { setShareInfo } from '@/utils/share'
 export default {
   data() {
     return {
+      isFixed: false,
       isshow: false,
       is_dk: false,
       titleinactivecolor: '#ccc',
@@ -211,6 +230,14 @@ export default {
           id: data.id
         }
       })
+    },
+    stickychange(isFixed) {
+      this.isFixed = isFixed
+    },
+    goGZH() {
+      window.open(
+        'https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzA4NTA2OTAyNA==&scene=110#wechat_redirect'
+      )
     }
   }
 }
@@ -221,11 +248,12 @@ export default {
   color: #fc5531;
   font-size: 24px;
 }
-.homepage {
+.aboutpage {
   position: relative;
   background: rgba(0, 0, 0, 0);
   overflow: hidden;
   z-index: 1;
+  padding-bottom: 100px;
   &::before {
     content: '';
     position: absolute;
@@ -254,13 +282,15 @@ export default {
       color: #fff;
       padding: 20px 0;
       .user-name {
-        font-size: 20px;
-        line-height: 2;
-        font-weight: 700;
+        // text-indent: 8px;
+        letter-spacing: 8px;
+        font-size: 22px;
+        line-height: 2.5;
+        font-weight: 600;
       }
       .user-desc {
-        font-size: 14px;
-        @include textoverflow(2);
+        font-size: 12px;
+        // @include textoverflow(2);
       }
     }
   }
@@ -272,13 +302,13 @@ export default {
       justify-content: flex-start;
       align-items: flex-start;
       box-sizing: border-box;
-      padding: 16px 0;
+      padding: 14px 0;
       background: #fff;
       min-height: 80px;
       .header-image {
         width: 38px;
         height: 38px;
-        border-radius: 50%;
+        // border-radius: 50%;
         overflow: hidden;
         margin-left: 25px;
         flex-shrink: 0;
@@ -292,24 +322,52 @@ export default {
       .user-info {
         margin: 0 15px;
         flex: 1;
+        background: #fff;
         .user-name {
           width: 100%;
           box-sizing: border-box;
           font-size: 14px;
           display: flex;
           justify-content: space-between;
+          align-items: flex-end;
           .user-l {
-            color: #441444;
+            color: #171717;
             font-weight: 600;
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            line-height: 1.2;
+            div {
+              text-indent: 4px;
+              letter-spacing: 4px;
+              p {
+              }
+              .English {
+                font-weight: 100;
+                font-size: 12px;
+                color: #3f3f3f;
+              }
+            }
+            .van-tag {
+              font-size: 12px;
+              margin-left: 4px;
+            }
           }
           .user-r {
             font-size: 12px;
-            color: #441444;
+            color: #fff;
+            background: #0ab18f;
+            padding: 2px 6px;
+            text-indent: 2px;
+            letter-spacing: 2px;
+            border-radius: 30px;
           }
         }
         .user-desc {
+          margin-top: 6px;
           font-size: 12px;
-          @include textoverflow(2);
+          color: #3f3f3f;
+          //   @include textoverflow(2);
         }
       }
     }
@@ -328,10 +386,24 @@ export default {
             font-size: 16px;
             font-weight: 600;
           }
+          span {
+            color: #cecece;
+          }
         }
         .block-content {
           padding: 10px 0;
           font-size: 14px;
+          color: #3f3f3f;
+          h6 {
+            font-weight: normal;
+            border-left: 6px solid #3f3f3f;
+            line-height: 1;
+            padding-left: 16px;
+            margin: 14px 0;
+          }
+          p {
+            line-height: 1.8;
+          }
         }
         .block-bottom {
           ul {
