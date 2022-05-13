@@ -1,8 +1,8 @@
 @font-face {
   font-family: 'iconfont'; /* Project id 3389701 */
-  src: url('//at.alicdn.com/t/font_3389701_928sz3la7qt.woff2?t=1652241038556') format('woff2'),
-    url('//at.alicdn.com/t/font_3389701_928sz3la7qt.woff?t=1652241038556') format('woff'),
-    url('//at.alicdn.com/t/font_3389701_928sz3la7qt.ttf?t=1652241038556') format('truetype');
+  src: url('//at.alicdn.com/t/font_3389701_h07ltjbw2.woff2?t=1652345576439') format('woff2'),
+    url('//at.alicdn.com/t/font_3389701_h07ltjbw2.woff?t=1652345576439') format('woff'),
+    url('//at.alicdn.com/t/font_3389701_h07ltjbw2.ttf?t=1652345576439') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,26 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-qizhi-:before {
+  content: '\e60a';
+}
+
+.icon-fenxiang1:before {
+  content: '\e64d';
+}
+
+.icon-daka:before {
+  content: '\f133';
+}
+
+.icon-tuku:before {
+  content: '\e63e';
+}
+
+.icon-hezuo:before {
+  content: '\e734';
 }
 
 .icon-dianzan_s:before {

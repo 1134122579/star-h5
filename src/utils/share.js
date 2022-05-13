@@ -9,7 +9,7 @@ import wx from 'weixin-js-sdk'
  * @param {*} imgUrl  分享图片地址
  *
  */
-async function getShareInfo(wxConfig) {
+async function getShareInfo(wxConfig, callback) {
   //如果分享的内容会根据情况变化，那么这里可以传入分享标题及url
 
   console.log('微信分享内容配置', wxConfig)
@@ -17,6 +17,7 @@ async function getShareInfo(wxConfig) {
   let data = await getShare({
     url: encodeURIComponent(wxConfig.url)
   }) //这里我写了一个公用的接口请求js，这里正常axios请求就可以，只要拿到数据都可以
+  callback()
   let res = data.data
   console.log(res)
   //拿到后端给的这些数据

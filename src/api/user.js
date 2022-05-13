@@ -38,6 +38,14 @@ export function getUserName(params) {
     hideloading: true
   })
 }
+export function getImage(data) {
+  return request({
+    url: api.getImage,
+    method: 'post',
+    data,
+    hideloading: true
+  })
+}
 export function getInfo(params) {
   return request({
     url: api.getInfo,

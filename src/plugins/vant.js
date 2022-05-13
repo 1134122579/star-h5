@@ -8,6 +8,7 @@ import {
   TabbarItem,
   ImagePreview,
   Image as VanImage,
+  Tag,
   NavBar,
   Icon,
   Field,
@@ -22,6 +23,7 @@ import {
   Tabs
 } from 'vant'
 Vue.use(Tab)
+Vue.use(Tag)
 Vue.use(Divider)
 Vue.use(ImagePreview)
 Vue.use(Tabs)

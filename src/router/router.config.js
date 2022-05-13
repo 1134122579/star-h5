@@ -12,6 +12,16 @@ export const constantRouterMap = [
     name: 'Detaile',
     component: () => import('@/views/detail/index.vue')
   },
+  {
+    path: '/imagelist',
+    name: 'Imagelist',
+    component: () => import('@/views/imagelist/index.vue')
+  },
+  {
+    path: '/about',
+    name: 'About',
+    component: () => import('@/views/about/index.vue')
+  },
   // {
   //   path: '/newculture',
   //   name: 'newCulture',

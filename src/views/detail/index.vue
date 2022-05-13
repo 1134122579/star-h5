@@ -1,6 +1,5 @@
 <template>
   <div class="detailpage">
-    <div class="radius"></div>
     <div class="title">来自天空之橙·Design | 空间设计</div>
     <div class="label">
       <p>建筑·空间·设计 的主题</p>
@@ -12,7 +11,7 @@
     </div>
     <div class="content-imglist">
       <div class="imgstyle" v-for="(item, index) in detail.imgs">
-        <img @click="ImagePreviewClick(index)" :src="item" alt="" />
+        <img @click="ImagePreviewClick(index)" :src="item + '?imageView2/3/w/300'" alt="" />
       </div>
     </div>
     <van-divider :style="{ color: '#d2d2d2', borderColor: '#d2d2d2', padding: '16px 0', margin: '0 8px' }" />
@@ -43,6 +42,7 @@ export default {
   },
   created() {
     this.getList()
+    console.log(this.$route, 'this.$route.path.replace')
   },
   methods: {
     goHome() {
@@ -57,14 +57,17 @@ export default {
     },
     getList() {
       let article_id = this.$route.query.id
+      if (!article_id) {
+        this.$router.replace({ path: '/' })
+      }
       getShareArticleDetails({ article_id }).then(res => {
         let data = res.data
         data['create_time'] = parseTime(data['create_time'].replaceAll('-', '/'), '{y}/{m}/{d} {h}:{i}')
         this.detail = data
         let wxConfig = {
-          title: data.share_title,
+          title: data.share_title || data.title,
           url: location.href,
-          desc: data.desc,
+          desc: data.desc || '',
           link: window.location.origin + window.location.pathname + '?id=' + data.id,
           imgUrl: data.imgs.length > 0 ? data.imgs[0] : 'http://api.skyorange.cn/logo.jpg'
         }
@@ -83,7 +86,8 @@ export default {
   box-sizing: border-box;
   z-index: 1;
   //   圆
-  .radius {
+  &::before {
+    content: '';
     border-radius: 50%;
     width: 120px;
     height: 120px;

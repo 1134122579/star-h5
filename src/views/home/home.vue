@@ -19,17 +19,17 @@
     <div class="main">
       <div class="main-header">
         <ul class="flexbetween">
-          <li @click="onDk">
+          <li @click="onDk" :style="is_dk && 'color:#3fe4c6'">
             <i class="iconfont icon-sign icon-size"></i>
-            <p>打卡</p>
+            <p>{{ is_dk ? '已打卡' : '打卡' }}</p>
           </li>
-          <li>
-            <i class="iconfont icon-dingyue icon-size"></i>
-            <p>订阅</p>
+          <li @click="goImagepage">
+            <i class="iconfont icon-tuku icon-size"></i>
+            <p>图库</p>
           </li>
-          <li>
-            <i class="iconfont icon-setting icon-size"></i>
-            <p>设置</p>
+          <li @click="goAbout">
+            <i class="iconfont icon-hezuo icon-size"></i>
+            <p>合作</p>
           </li>
           <li @click="onshare">
             <i class="iconfont icon-fenxiang icon-size"></i>
@@ -125,6 +125,7 @@ import { setShareInfo } from '@/utils/share'
 export default {
   data() {
     return {
+      is_dk: false,
       titleinactivecolor: '#ccc',
       titleactivecolor: '#333',
       linewidth: '20px',
@@ -167,17 +168,25 @@ export default {
     }
   },
   created() {
-    this.getList()
     let wxConfig = {
       title: '天空之橙·Design｜建筑·空间·景观·运营',
       url: location.href,
       desc: '',
-      link: window.location.origin + window.location.pathname,
+      //   link: location.href,
+      link: window.location.href,
+
       imgUrl: 'http://api.skyorange.cn/logo.jpg'
     }
     setShareInfo(wxConfig)
+    this.getList()
   },
   methods: {
+    goAbout() {
+      this.$router.replace({ path: '/about' })
+    },
+    goImagepage() {
+      this.$router.replace({ path: '/imagelist' })
+    },
     scrollIntoView(id) {
       console.log(this.$el.querySelector(id))
       this.$el.querySelector(id).scrollIntoView({
@@ -202,7 +211,10 @@ export default {
       this.getList()
     },
     onDk() {
-      this.$toast.success('打卡成功')
+      if (!this.is_dk) {
+        this.is_dk = true
+        this.$toast.success('打卡成功')
+      }
     },
     onshare() {
       this.isshareShow = true
@@ -241,7 +253,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .colorRed {
   color: #fc5531;
   font-size: 24px;
@@ -313,6 +325,7 @@ export default {
         justify-content: space-around;
         font-size: 12px;
         li {
+          width: 40px;
           text-align: center;
           .icon-size {
             font-size: 22px;
