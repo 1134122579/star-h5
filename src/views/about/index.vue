@@ -97,11 +97,13 @@
         >
           <van-icon name="cross" size="14" />
         </div>
-        <p>如需合作！请添加星主好友</p>
+        <p>合作咨询？添加好友立即联系</p>
         <p class="mini">长按识别二维码</p>
-        <div class="codestyle"></div>
-        <p>如需合作！请添加星主好友</p>
-        <p>如需合作！请添加星主好友</p>
+        <div class="codestyle">
+          <img src="../../assets/code.jpg" alt="" />
+        </div>
+        <p>盛视天橙DESIGN</p>
+        <p>建筑丨空间丨景观丨设计</p>
       </div>
     </van-popup>
   </div>
@@ -454,10 +456,15 @@ export default {
     }
     .codestyle {
       background: #ccc;
-      height: 120px;
-      width: 120px;
+      height: 130px;
+      width: 130px;
       margin: 20px auto;
-      border-bottom: 1px solid #ccc;
+      //   border-bottom: 1px solid #ccc;
+      img {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
     }
     .close {
       position: absolute;
