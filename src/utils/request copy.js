@@ -17,7 +17,7 @@ setToken(
 // request拦截器 request interceptor
 service.interceptors.request.use(
   config => {
-    let token = getToken()
+    const token = getToken()
     if (token) {
       config.headers['access-user-token'] = token
     }

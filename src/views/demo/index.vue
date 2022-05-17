@@ -109,10 +109,10 @@ export default {
   methods: {
     // 创建带锚点的链接
     goPostion() {
-      let to = localStorage.getItem('ROUTERID')
-      let ROUTERID = JSON.parse(to)
+      const to = localStorage.getItem('ROUTERID')
+      const ROUTERID = JSON.parse(to)
       console.log('锚点====', ROUTERID)
-      let value = '#' + ROUTERID
+      const value = '#' + ROUTERID
       this.goAnchor(value)
       // console.log('锚点====', to.split('/')[1])
     },

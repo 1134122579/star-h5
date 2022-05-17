@@ -1,6 +1,6 @@
-let admin_token = 'token'
-let userauth = 'userIfo'
-let admin_video = 'VIDEOLIST'
+const admin_token = 'token'
+const userauth = 'userIfo'
+const admin_video = 'VIDEOLIST'
 // 设置token
 export function setToken(token) {
   localStorage.setItem(admin_token, token)

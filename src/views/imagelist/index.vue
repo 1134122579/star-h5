@@ -98,7 +98,7 @@ export default {
   },
   created() {
     this.getList()
-    let wxConfig = {
+    const wxConfig = {
       title: '天空之橙·Design｜建筑·空间·景观·运营·图库',
       url: location.href,
       desc: '',
@@ -110,7 +110,7 @@ export default {
   methods: {
     ImagePreviewClick(index) {
       console.log(index)
-      let imglist = this.list.map(item => item.url)
+      const imglist = this.list.map(item => item.url)
       ImagePreview({
         images: imglist,
         startPosition: index

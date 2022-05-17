@@ -56,15 +56,15 @@ export default {
       })
     },
     getList() {
-      let article_id = this.$route.query.id
+      const article_id = this.$route.query.id
       if (!article_id) {
         this.$router.replace({ path: '/' })
       }
       getShareArticleDetails({ article_id }).then(res => {
-        let data = res.data
+        const data = res.data
         data['create_time'] = parseTime(data['create_time'].replaceAll('-', '/'), '{y}/{m}/{d} {h}:{i}')
         this.detail = data
-        let wxConfig = {
+        const wxConfig = {
           title: data.share_title || data.title,
           url: location.href,
           desc: data.desc || '',

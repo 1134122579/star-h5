@@ -170,7 +170,7 @@ export default {
     }
   },
   created() {
-    let wxConfig = {
+    const wxConfig = {
       title: '天空之橙·Design｜建筑·空间·景观·运营',
       url: location.href,
       desc: '',
@@ -291,8 +291,8 @@ export default {
     padding-right: 10px;
 
     .header-image {
-      width: 68px;
-      height: 68px;
+      width: 60px;
+      height: 60px;
       //   border-radius: 50%;
       overflow: hidden;
       margin-left: 25px;
@@ -308,7 +308,7 @@ export default {
       margin-left: 15px;
       color: #fff;
       .user-name {
-        font-size: 16px;
+        font-size: 18px;
       }
       .user-desc {
         font-size: 12px;

@@ -32,7 +32,7 @@ export default {
   },
   filters: {
     backgroundFilter(item) {
-      let background = 'background-image:url(' + item + ')'
+      const background = 'background-image:url(' + item + ')'
       return background
     }
   },

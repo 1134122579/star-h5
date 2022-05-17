@@ -10,22 +10,22 @@ import wx from 'weixin-js-sdk'
  *
  */
 async function getShareInfo(wxConfig, callback) {
-  //如果分享的内容会根据情况变化，那么这里可以传入分享标题及url
+  // 如果分享的内容会根据情况变化，那么这里可以传入分享标题及url
 
   console.log('微信分享内容配置', wxConfig)
   // wxConfig['imgUrl'] = encodeURIComponent(wxConfig['imgUrl'])
-  let data = await getShare({
+  const data = await getShare({
     url: encodeURIComponent(wxConfig.url)
-  }) //这里我写了一个公用的接口请求js，这里正常axios请求就可以，只要拿到数据都可以
+  }) // 这里我写了一个公用的接口请求js，这里正常axios请求就可以，只要拿到数据都可以
   callback()
-  let res = data.data
+  const res = data.data
   console.log(res)
-  //拿到后端给的这些数据
+  // 拿到后端给的这些数据
   // console.log('微信配置返回', res)
-  let appId = res.appId
-  let timestamp = res.timestamp
-  let nonceStr = res.nonceStr
-  let signature = res.signature
+  const appId = res.appId
+  const timestamp = res.timestamp
+  const nonceStr = res.nonceStr
+  const signature = res.signature
   wx.config({
     debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
     appId: appId, // 必填，公众号的唯一标识，填自己的！
@@ -35,7 +35,7 @@ async function getShareInfo(wxConfig, callback) {
     jsApiList: ['updateAppMessageShareData', 'updateTimelineShareData', 'hideMenuItems', 'hideAllNonBaseMenuItem'], // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
     openTagList: ['wx-open-subscribe']
   })
-  wx.ready(function () {
+  wx.ready(function() {
     wx.updateAppMessageShareData(wxConfig)
     wx.updateTimelineShareData(wxConfig)
     wx.hideMenuItems({
@@ -57,9 +57,9 @@ async function getShareInfo(wxConfig, callback) {
   })
 }
 function setShareInfo(wxConfig) {
-  //如果分享的内容会根据情况变化，那么这里可以传入分享标题及url
+  // 如果分享的内容会根据情况变化，那么这里可以传入分享标题及url
   console.log('微信分享内容配置', wxConfig)
-  wx.ready(function () {
+  wx.ready(function() {
     wx.updateAppMessageShareData(wxConfig)
     wx.updateTimelineShareData(wxConfig)
   })

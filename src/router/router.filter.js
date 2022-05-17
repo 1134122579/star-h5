@@ -1,7 +1,7 @@
 import { getShareInfo } from '@/utils/share.js'
 import { getUrlKey, okload } from '@/utils/wxLoad.js'
 import { getToken, setToken, removeToken } from '@/utils/loading.js'
-export default function (router) {
+export default function(router) {
   router.beforeEach((to, from, next) => {
     // const id = getUrlKey('id')
     // const url = '' + window.location.origin + window.location.pathname + id && '?id=' + id

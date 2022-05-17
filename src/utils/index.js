@@ -102,7 +102,7 @@ export function param2Obj(url) {
  * @param value 数字值
  */
 export function bigNumberTransform(value) {
-  let num = Number(value)
+  const num = Number(value)
   if (num == 0) {
     return num + ''
   } else if (num > 1 && num < 10000) {

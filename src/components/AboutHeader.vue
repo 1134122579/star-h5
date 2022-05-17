@@ -79,7 +79,7 @@ export default {
       this.show = !this.show
     },
     goPage(data) {
-      let { id } = data
+      const { id } = data
       this.$router.push({
         path: '/AboutContent',
         query: {

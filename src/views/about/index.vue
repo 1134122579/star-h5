@@ -17,11 +17,10 @@
             <img src="../../assets/logo.png" alt="" />
           </div>
           <!-- 个人信息 -->
-
           <div class="user-info">
             <div class="user-name">
               <div class="user-l">
-                <div>
+                <div :style="!isFixed && 'padding-top:5px'">
                   <p>盛视天橙</p>
                   <p class="English">DESIGN</p>
                 </div>
@@ -53,6 +52,10 @@
             <p>建筑设计丨空间设计丨景观设计</p>
             <p>文创文旅丨城市更新丨智慧城市</p>
             <p>运营管理丨视频制作丨数字开发</p>
+            <!-- 图片 -->
+            <div class="imagestyle">
+              <img src="@/assets//about.jpg" alt="" />
+            </div>
             <h6>设计宗旨</h6>
             <p>未来城市：与年轻人同行</p>
             <p>用设计留住年轻人，赋予城市新生命</p>
@@ -74,10 +77,23 @@
               </li>
             </ul>
           </div>
+          <van-divider :style="{ color: '#d2d2d2', borderColor: '#d2d2d2', padding: '16px 0', margin: '0 8px' }" />
+          <div class="bottomtext">
+            <p class="tel">电话：<a href="tel:+400-921-0276">400-921-0276</a></p>
+            <p>上海丨深圳丨济南丨武汉丨成都丨西安丨太原丨合肥丨长沙</p>
+            <p>贵阳丨苏州丨嘉兴丨莆田丨扬州丨滨州丨淄博丨芜湖</p>
+            <p>周口丨阜阳</p>
+          </div>
         </div>
       </div>
+      <!-- 图片
+      <div class="imagestyle">
+        <img src="@/assets//about.jpg" alt="" />
+      </div> -->
+
+      <!-- 按钮 -->
       <div class="button-bottom">
-        <van-button color="#FE7A53" block @click="onclick" style="border-radius: 5px"> 合作咨询 </van-button>
+        <van-button color="#FE7A53" block @click="onclick" style="border-radius: 5px"> 在线联系 </van-button>
         <van-button color="#767676" style="width: 80px; border-radius: 5px; margin-left: 3px" @click="goHome"
           >首页
         </van-button>
@@ -285,9 +301,9 @@ export default {
       padding: 20px 0;
       .user-name {
         // text-indent: 8px;
-        letter-spacing: 8px;
+        letter-spacing: 4px;
         font-size: 22px;
-        line-height: 2.5;
+        line-height: 2;
         font-weight: 600;
       }
       .user-desc {
@@ -306,7 +322,7 @@ export default {
       box-sizing: border-box;
       padding: 14px 0;
       background: #fff;
-      min-height: 80px;
+      //   min-height: 80px;
       .header-image {
         width: 38px;
         height: 38px;
@@ -331,7 +347,7 @@ export default {
           font-size: 14px;
           display: flex;
           justify-content: space-between;
-          align-items: flex-end;
+          align-items: center;
           .user-l {
             color: #171717;
             font-weight: 600;
@@ -340,7 +356,6 @@ export default {
             align-items: flex-start;
             line-height: 1.2;
             div {
-              text-indent: 4px;
               letter-spacing: 4px;
               p {
               }
@@ -359,7 +374,7 @@ export default {
             font-size: 12px;
             color: #fff;
             background: #0ab18f;
-            padding: 2px 6px;
+            padding: 2px 9px;
             text-indent: 2px;
             letter-spacing: 2px;
             border-radius: 30px;
@@ -368,7 +383,7 @@ export default {
         .user-desc {
           margin-top: 6px;
           font-size: 12px;
-          color: #3f3f3f;
+          color: #6e6969;
           //   @include textoverflow(2);
         }
       }
@@ -478,6 +493,29 @@ export default {
       border-radius: 50%;
       color: #fff;
       padding: 4px;
+    }
+  }
+  .imagestyle {
+    background: #fff;
+    height: auto;
+    display: block;
+    box-sizing: border-box;
+    padding: 16px 0;
+    img {
+      width: 100%;
+    }
+  }
+  .bottomtext {
+    font-size: 12px;
+    color: #8e8a8a;
+    text-align: center;
+    line-height: 2;
+    .tel {
+      font-size: 15px;
+      a {
+        font-size: 16px;
+        color: #8e8a8a;
+      }
     }
   }
 }

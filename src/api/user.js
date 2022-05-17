@@ -10,7 +10,7 @@ export function login(data) {
     data
   })
 }
-//wx 登录
+// wx 登录
 export function wxlogin(data) {
   return request({
     url: api.wxlogin,

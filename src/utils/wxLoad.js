@@ -76,7 +76,7 @@ export function isUserAuth(to, next) {
   const pageSure = to.meta.isPamiss || false
   getUserInfo().then(res => {
     setUserAuth(JSON.stringify(res))
-    let userInfo = res
+    const userInfo = res
     const is_auth = userInfo.is_auth
     if (is_auth == 1 || !pageSure) {
       // 判断是否是vip 订阅页

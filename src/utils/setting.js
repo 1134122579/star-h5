@@ -1,5 +1,5 @@
-;(function () {
-  if (typeof WeixinJSBridge == 'object' && typeof WeixinJSBridge.invoke == 'function') {
+(function() {
+  if (typeof WeixinJSBridge === 'object' && typeof WeixinJSBridge.invoke === 'function') {
     handleFontSize()
   } else {
     if (document.addEventListener) {
@@ -15,7 +15,7 @@
       fontSize: 1
     })
     // 重写设置网页字体大小的事件
-    WeixinJSBridge.on('menu:setfont', function () {
+    WeixinJSBridge.on('menu:setfont', function() {
       WeixinJSBridge.invoke('setFontSizeCallback', {
         fontSize: 1
       })
