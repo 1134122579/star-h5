@@ -40,7 +40,9 @@
         <div class="block">
           <div class="block-header">
             <p>关于我们</p>
-            <span><i class="iconfont icon-qizhi-"></i> 投诉</span>
+            <a href="tel:021-54561178">
+              <span><i class="iconfont icon-qizhi-"></i> 投诉</span></a
+            >
           </div>
           <div class="block-content">
             <h6>盛视天橙 DESIGN</h6>
@@ -79,7 +81,10 @@
           </div>
           <van-divider :style="{ color: '#d2d2d2', borderColor: '#d2d2d2', padding: '16px 0', margin: '0 8px' }" />
           <div class="bottomtext">
-            <p class="tel">电话：<a href="tel:+400-921-0276">400-921-0276</a></p>
+            <p class="tel">
+              <span class="iconfont icon-dianhua" style="margin-right: 5px"></span
+              ><a href="tel:021-54561178">021-54561178</a>
+            </p>
             <p>上海丨深圳丨济南丨武汉丨成都丨西安丨太原丨合肥丨长沙</p>
             <p>贵阳丨苏州丨嘉兴丨莆田丨扬州丨滨州丨淄博丨芜湖</p>
             <p>周口丨阜阳</p>
@@ -391,14 +396,18 @@ export default {
     .main-content {
       background: #fff;
       .block {
-        margin-top: 14px;
+        margin-top: 10px;
         box-sizing: border-box;
         padding: 14px 20px;
-
         .block-header {
           display: flex;
           justify-content: space-between;
           align-items: flex-end;
+          a {
+            &:hover {
+              text-decoration: initial;
+            }
+          }
           p {
             font-size: 16px;
             font-weight: 600;
@@ -431,12 +440,11 @@ export default {
               width: 30%;
               text-align: center;
               p {
-                font-weight: 700;
                 font-size: 16px;
               }
               .tag {
                 font-size: 12px;
-                color: #ccc;
+                color: #9f9c9c;
               }
             }
           }
@@ -500,8 +508,10 @@ export default {
     height: auto;
     display: block;
     box-sizing: border-box;
-    padding: 16px 0;
+    // padding: 16px 0;
+    overflow: hidden;
     img {
+      transform: scale(1.1);
       width: 100%;
     }
   }
@@ -511,9 +521,14 @@ export default {
     text-align: center;
     line-height: 2;
     .tel {
-      font-size: 15px;
+      font-size: 14px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      line-height: 1;
+      padding: 6px 0;
       a {
-        font-size: 16px;
+        font-size: 14px;
         color: #8e8a8a;
       }
     }

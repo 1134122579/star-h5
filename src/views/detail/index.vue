@@ -42,18 +42,46 @@ export default {
   },
   created() {
     this.getList()
-    console.log(this.$route, 'this.$route.path.replace')
   },
+  mounted() {},
   methods: {
     goHome() {
       this.$router.replace({ path: '/' })
     },
     ImagePreviewClick(index) {
       console.log(index)
-      ImagePreview({
+      let that = this
+      let ImagePreview = ImagePreview({
         images: this.detail.imgs,
         startPosition: index
+        // closeable: true,
+        // closeIconPosition: 'top-right',
+        // asyncClose: true,
+        // close: () => {
+        //   console.log(123, ImagePreview)
+        //   ImagePreview.close()
+        // }
+        // onClose: function (index, url) {
+        //   //回调参数,官方文档解释的不是很清楚。。。
+        //   //回调参数类型 url:{ index:Number(当前图片的索引值), url:当前图片的URL }
+        //   var num = url.index,
+        //     url_link = url.url
+        //   console.log(index, url)
+        // }
       })
+      //   let after = getComputedStyle(document.querySelector('.van-image-preview__overlay'), ':after')
+      //   console.log(
+      //     after.getPropertyValue('content'),
+      //     "  getComputedStyle(document.querySelector('.van-image-preview__overlay'), ':after')"
+      //   )
+      //   setTimeout(() => {
+      //     ImagePreview.close()
+      //   }, 2000)
+    },
+
+    onClose(ImagePreview) {
+      console.log(111, ImagePreview)
+      ImagePreview.close()
     },
     getList() {
       const article_id = this.$route.query.id
@@ -178,4 +206,17 @@ export default {
     box-shadow: 0 0 8px #767676;
   }
 }
+// .van-image-preview__overlay {
+//   &::after {
+//     content: '查看原图';
+//     color: #fff;
+//     background: rgba(255, 255, 255, 0.5);
+//     padding: 4px 10px;
+//     position: absolute;
+//     bottom: 50px;
+//     right: 30px;
+//     border-radius: 5px;
+//     z-index: 9999999;
+//   }
+// }
 </style>
